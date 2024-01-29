@@ -1,10 +1,14 @@
 <section>
   <ul class="list-unstyled d-flex flex-column gap-3"> 
     <%@recipes.each do |recipe|%>
-      <li class="d-flex gap-5 border border-2">
+      <li class="d-flex gap-5 border border-2 p-2">
         <div class="w-25">
-          <h3 class="fs-3"><%= recipe.name%></h3>
-          <span>Remove Link here</span>
+            <%= link_to recipe_path(recipe) do%>
+              <h3 class="fs-3"><%= recipe.name%></h3>
+            <%end%>
+            <span>Remove Link here Or Author Name If not current_user</span>
+            <%= button_to "Remove", recipe_path(recipe.id), method: :delete, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, class: 'btn btn-danger'%>
+            <p>By: <%= recipe.user.name%></p>
         </div>
         <div>
           <p><%= recipe.description%></p>
