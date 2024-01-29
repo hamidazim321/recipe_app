@@ -1,5 +1,6 @@
 class RecipeController < ApplicationController
-  def index 
+  def index
+    # recipe = Recipe.where(user_id: current_user.id)
     @recipes = Recipe.all
   end
 
@@ -18,5 +19,9 @@ class RecipeController < ApplicationController
       flash[:error] = @recipe.errors.full_messages.to_sentence
     end
     redirect_to request.referrer
+  end
+
+  def public_recipe
+    @recipes = Recipe.where(public: true)
   end
 end

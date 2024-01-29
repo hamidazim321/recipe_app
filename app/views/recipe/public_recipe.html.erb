@@ -1,0 +1,18 @@
+<section>
+  <h1 class="text-center">Public Recipes</h1>
+  <ul class="list-unstyled d-flex flex-column gap-3"> 
+    <%@recipes.each do |recipe|%>
+      <li class="d-flex gap-5 border border-2 p-2">
+        <div class="w-25">
+            <%= link_to recipe_path(recipe) do%>
+              <h3 class="fs-3"><%= recipe.name%></h3>
+            <%end%>
+            <p>By: <%= recipe.user.name%></p>
+        </div>
+        <div>
+          <p><%= recipe.description%></p>
+        </div>
+      </li>
+    <%end%>
+  </ul>
+</section>
