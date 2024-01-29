@@ -1,0 +1,36 @@
+<section>
+  <h1 class="text-center"><%= @recipe.name%></h1>
+  <div class="d-flex justify-content-between">
+    <div><p>preparation time: <%= @recipe.preparation_time%> hours</p></div>
+    <div>Public toggle</div>
+  </div>
+  <div>
+    <p>Cooking time: <%= @recipe.cooking_time%> hours</p>
+  </div>
+  <div>
+    <h3>instructions</h3>
+    <p><%= @recipe.description%></p>
+  </div>
+  <div class="d-flex justify-content-between border-bottom border-2 pb-2">
+    <button>Generate shopping list</button>
+    <button>Add ingredients</button>
+  </div>
+  <table class="table border-top-2">
+    <thead>
+      <tr class="table-secondary">
+        <th class="border-top-0 border border-2">Food</th>
+        <th class="border-top-0 border border-2">Quantity</th>
+        <th class="border-top-0 border border-2">Value</th>
+        <th class="border-top-0 border border-2">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border-top-0 border border-2">Data later</td>
+        <td class="border-top-0 border border-2">Data later</td>
+        <td class="border-top-0 border border-2">Data later</td>
+        <td class="border-top-0 border border-2">Data later</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
