@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :recipe, only: [:index, :show, :destroy, :create]
-  get 'public_recipes', to: 'recipe#public_recipe'
+  devise_for :users
+  root "recipes#index"
+  resources :recipes, only: [:index, :show, :destroy, :create]
+  get 'public_recipes', to: 'recipes#public_recipes'
+  devise_scope :user do
+    get "/users/sign_out" => "devise/sessions#destroy"
+  end
   get 'up' => 'rails/health#show', as: :rails_health_check
 
   # Defines the root path route ("/")

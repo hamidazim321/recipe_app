@@ -1,4 +1,5 @@
-class RecipeController < ApplicationController
+class RecipesController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:public_recipes]
   def index
     # recipe = Recipe.where(user_id: current_user.id)
     @recipes = Recipe.all
@@ -21,7 +22,7 @@ class RecipeController < ApplicationController
     redirect_to request.referrer
   end
 
-  def public_recipe
+  def public_recipes
     @recipes = Recipe.where(public: true)
   end
 end
