@@ -6,11 +6,9 @@
             <%= link_to recipe_path(recipe) do%>
               <h3 class="fs-3"><%= recipe.name%></h3>
             <%end%>
-            <span>Remove Link here Or Author Name If not current_user</span>
             <%= button_to "Remove", recipe_path(recipe.id), method: :delete, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, class: 'btn btn-danger'%>
-            <p>By: <%= recipe.user.name%></p>
         </div>
-        <div>
+        <div class="w-75">
           <p><%= recipe.description%></p>
         </div>
       </li>

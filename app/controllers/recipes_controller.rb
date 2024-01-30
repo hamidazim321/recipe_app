@@ -1,8 +1,7 @@
 class RecipesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:public_recipes]
   def index
-    # recipe = Recipe.where(user_id: current_user.id)
-    @recipes = Recipe.all
+    @recipes = Recipe.includes(:user).where(user_id: current_user.id)
   end
 
   def show
@@ -23,6 +22,6 @@ class RecipesController < ApplicationController
   end
 
   def public_recipes
-    @recipes = Recipe.where(public: true)
+    @recipes = Recipe.includes(:user).where(public: true).order(created_at: :desc)
   end
 end
