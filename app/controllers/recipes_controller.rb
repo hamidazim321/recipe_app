@@ -24,4 +24,14 @@ class RecipesController < ApplicationController
   def public_recipes
     @recipes = Recipe.includes(:user).where(public: true).order(created_at: :desc)
   end
+
+  def update_public
+    @recipe = Recipe.find_by_id(params[:id])
+    if @recipe.toggle!(:public)
+      flash[:notice] = "public state updated"
+    else
+      flash[:error] = @recipe.errors.full_messages.to_sentence
+    end
+    redirect_to request.referrer
+  end
 end

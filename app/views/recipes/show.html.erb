@@ -1,13 +1,19 @@
 <section>
   <h1 class="text-center"><%= @recipe.name%></h1>
   <div class="d-flex justify-content-between">
-    <div><p>preparation time: <%= @recipe.preparation_time%> hours</p></div>
+    <div><p><strong>preparation time:</strong> <%= @recipe.preparation_time%> hours</p></div>
     <% if can? :update, @recipe%>
-      <div>Public toggle</div>
+      <div class= "d-inline-flex w-25 gap-3 align-items-center">
+        <span class="fs-4">Public</span>
+        <%= button_to update_public_recipe_path(@recipe), method: :patch, class: (@recipe.public ? 'bg-success' : 'bg-danger') + ' btn' do %>
+          <%= @recipe.public ? 'on' : 'off' %>
+        <% end %>
+
+      </div>
     <% end %>
   </div>
   <div>
-    <p>Cooking time: <%= @recipe.cooking_time%> hours</p>
+    <p><strong>Cooking time:</strong> <%= @recipe.cooking_time%> hours</p>
   </div>
   <div>
     <h3>instructions</h3>
