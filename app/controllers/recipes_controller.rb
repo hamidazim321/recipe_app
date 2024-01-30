@@ -11,10 +11,10 @@ class RecipesController < ApplicationController
   # def create
   # end
 
-  def destroy 
+  def destroy
     @recipe = Recipe.find_by_id(params[:id])
     if @recipe.destroy
-      flash[:notice] = "recipe deleted"
+      flash[:notice] = 'recipe deleted'
     else
       flash[:error] = @recipe.errors.full_messages.to_sentence
     end
@@ -28,7 +28,7 @@ class RecipesController < ApplicationController
   def update_public
     @recipe = Recipe.find_by_id(params[:id])
     if @recipe.toggle!(:public)
-      flash[:notice] = "public state updated"
+      flash[:notice] = 'public state updated'
     else
       flash[:error] = @recipe.errors.full_messages.to_sentence
     end

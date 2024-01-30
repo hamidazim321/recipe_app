@@ -4,6 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :recipe, dependent: :destroy
-  
-  validates :name, presence: true, length: {maximum: 120}, uniqueness: true
+
+  validates :name, presence: true, length: { maximum: 120 }, uniqueness: true
 end
