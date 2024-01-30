@@ -1,0 +1,46 @@
+<section>
+  <h1 class="text-center"><%= @recipe.name%></h1>
+  <div class="d-flex justify-content-between">
+    <div><p><strong>preparation time:</strong> <%= @recipe.preparation_time%> hours</p></div>
+    <% if can? :update, @recipe%>
+      <div class= "d-inline-flex w-25 gap-3 align-items-center">
+        <span class="fs-4">Public</span>
+        <%= button_to update_public_recipe_path(@recipe), method: :patch, class: (@recipe.public ? 'bg-success' : 'bg-danger') + ' btn' do %>
+          <%= @recipe.public ? 'on' : 'off' %>
+        <% end %>
+
+      </div>
+    <% end %>
+  </div>
+  <div>
+    <p><strong>Cooking time:</strong> <%= @recipe.cooking_time%> hours</p>
+  </div>
+  <div>
+    <h3>instructions</h3>
+    <p><%= @recipe.description%></p>
+  </div>
+  <div class="d-flex justify-content-between border-bottom border-2 pb-2">
+    <button>Generate shopping list</button>
+    <%if can? :update, @recipe%>
+      <button>Add ingredients</button>
+    <%end%>
+  </div>
+  <table class="table border-top-2">
+    <thead>
+      <tr class="table-secondary">
+        <th class="border-top-0 border border-2">Food</th>
+        <th class="border-top-0 border border-2">Quantity</th>
+        <th class="border-top-0 border border-2">Value</th>
+        <th class="border-top-0 border border-2">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border-top-0 border border-2">Data later</td>
+        <td class="border-top-0 border border-2">Data later</td>
+        <td class="border-top-0 border border-2">Data later</td>
+        <td class="border-top-0 border border-2">Data later</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
