@@ -2,5 +2,5 @@ class Inventory < ApplicationRecord
   belongs_to :user
   validates :name, presence: true
 
-  validates :description, presence: true, length: { maximum: 250 }
+  validates :description, length: { maximum: 250 }
 end

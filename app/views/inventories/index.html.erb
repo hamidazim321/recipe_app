@@ -12,7 +12,7 @@
                             <a href="inventory_path(id: inventory.id)" class="inventory-card-name"><%= inventory.name %></a>
                             <p class="inventory-card-description"><%= inventory.description %></p> 
                         </div>
-                           <a href="inventory_path(id: inventory.id)" data-method="delete" data-confirm="Are you sure?" class="inventory-card-link inventory-card-link-remove">REMOVE</a>
+                           <%= link_to "Remove", inventory_path(inventory.id), method: :delete, data: { confirm: "Are you sure?" }, class: "inventory-card-link inventory-card-link-remove" %>
                     </div>
                 <% end %>
             <% end %>
