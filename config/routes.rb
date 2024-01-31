@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       patch :update_public
     end
   end
+  resources :inventories
+  
   get 'public_recipes', to: 'recipes#public_recipes'
   devise_scope :user do
     get "/users/sign_out" => "devise/sessions#destroy"
