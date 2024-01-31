@@ -44,4 +44,3 @@ class InventoriesController < ApplicationController
   
 end
 
-end
