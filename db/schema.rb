@@ -10,11 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_31_102255) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_31_124142) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "foods", force: :cascade do |t|
+    t.string "name"
+    t.string "measurement_unit"
+    t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -31,6 +34,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_31_102255) do
   create_table "inventory_foods", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "quantity"
+    t.bigint "inventory_id", null: false
+    t.bigint "food_id", null: false
+    t.index ["food_id"], name: "index_inventory_foods_on_food_id"
+    t.index ["inventory_id"], name: "index_inventory_foods_on_inventory_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -63,5 +71,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_31_102255) do
   end
 
   add_foreign_key "inventories", "users"
+  add_foreign_key "inventory_foods", "foods"
+  add_foreign_key "inventory_foods", "inventories"
   add_foreign_key "recipes", "users"
 end
