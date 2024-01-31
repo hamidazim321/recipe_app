@@ -38,10 +38,9 @@ class InventoriesController < ApplicationController
   private
 
   def inventory_params
-    inventory_hash = params.require(:inventory).permit(:name, :description)
-    inventory_hash[:user] = current_user
-    inventory_hash
+    params.require(:inventory).permit(:name, :description).merge(user: current_user)
   end
+  
 end
 
 end
