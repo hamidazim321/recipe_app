@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  */
- body {
+body {
   background: #86b6e9;
 }
 
@@ -52,7 +52,6 @@
 }
 
 .inventory-card-link {
-  
   color: white;
   border: none;
   cursor: pointer;

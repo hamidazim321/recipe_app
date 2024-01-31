@@ -1,20 +1,19 @@
 
-    <div id="inventory-list">
-        <% if current_user %>
-            <h1>Your Inventories</h1>
-
-            <% if @inventories.empty? %>
-                <p>No inventories yet.</p>
-            <% else %>
-                <% @inventories.each do |inventory| %>
-                    <div class="inventory-card">
-                        <div class="inventory-card-header">
-                            <a href="inventory_path(id: inventory.id)" class="inventory-card-name"><%= inventory.name %></a>
-                            <p class="inventory-card-description"><%= inventory.description %></p> 
-                        </div>
-                           <%= link_to "Remove", inventory_path(inventory.id), method: :delete, data: { confirm: "Are you sure?" }, class: "inventory-card-link inventory-card-link-remove" %>
-                    </div>
-                <% end %>
-            <% end %>
-        <% end %>
-    </div>
+<div id="inventory-list">
+  <% if current_user %>
+    <h1>Your Inventories</h1>
+    <% if @inventories.empty? %>
+      <p>No inventories yet.</p>
+    <% else %>
+      <% @inventories.each do |inventory| %>
+        <div class="inventory-card">
+          <div class="inventory-card-header">
+              <a href="inventory_path(id: inventory.id)" class="inventory-card-name"><%= inventory.name %></a>
+              <p class="inventory-card-description"><%= inventory.description %></p> 
+          </div>
+          <%= link_to "Remove", inventory_path(inventory.id), method: :delete, data: { confirm: "Are you sure?" }, class: "inventory-card-link inventory-card-link-remove" %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
