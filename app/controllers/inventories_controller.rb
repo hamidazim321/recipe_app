@@ -26,10 +26,12 @@ class InventoriesController < ApplicationController
     @inventory.destroy
 
     if @inventory.destroyed?
-      redirect_to inventories_path, notice: 'Successfully deleted inventory.'
+      flash[:notice] = 'Successfully deleted inventory.'
     else
-      redirect_back(fallback_location: inventories_path, alert: 'Could not delete inventory.')
+      flash[:alert] = 'Could not delete inventory.'
     end
+
+    redirect_back(fallback_location: inventories_path)
   end
 
   private
