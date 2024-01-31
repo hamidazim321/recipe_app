@@ -13,3 +13,54 @@
  *= require_tree .
  *= require_self
  */
+body {
+  background: #86b6e9;
+}
+
+#inventory-list {
+  margin: 0 auto;
+  width: 80%;
+  text-align: center;
+}
+
+.inventory-card {
+  margin: 20px 0;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.inventory-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inventory-card-name {
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.inventory-card-description {
+  margin: 10px 0;
+}
+
+.inventory-card-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inventory-card-link {
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.inventory-card-link-remove {
+  width: 10%;
+  display: flex;
+  align-self: flex-start;
+  text-align: center;
+  color: #007bff;
+}
