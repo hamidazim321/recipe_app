@@ -24,7 +24,7 @@ class InventoriesController < ApplicationController
   def destroy
     @inventory = Inventory.find(params[:id])
     @inventory.destroy
-  
+
     if @inventory.destroyed?
       flash[:notice] = 'Successfully deleted inventory.'
       redirect_to inventories_path
@@ -32,8 +32,7 @@ class InventoriesController < ApplicationController
       flash[:alert] = 'Could not delete inventory.'
       redirect_back(fallback_location: inventories_path)
     end
-  end 
-  
+  end
 
   private
 
