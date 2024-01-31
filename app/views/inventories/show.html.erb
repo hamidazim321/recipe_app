@@ -1,7 +1,7 @@
 <section>
   <div class="d-flex flex-column mb-3 pb-2 border-2 border-dark border-bottom">
     <h1 class="text-center"><%= @inventory.name%></h1>
-    <button class="ms-auto">add food button</button>
+    <button class="ms-auto", id="food-btn">add food</button>
   </div>
   <table class="table border-top-2">
     <thead>
@@ -21,14 +21,31 @@
       <%end%>
     </tbody>
   </table>
-  <%= form_with(model: [ @inventory.inventory_foods.build ], local: true) do |f| %>
+  <%= form_with(model: [ @inventory.inventory_foods.build ], local: true, class: "d-none position-absolute top-50 start-50 translate-middle bg-secondary w-50 p-4", id: "food-form") do |f| %>
     <%= f.hidden_field :inventory_id, value: @inventory.id %>
-    <%= f.number_field :quantity, placeholder: 'quantity', class: 'form-control mb-2' %>
+		<div class="mb-2">
+			<%= f.number_field :quantity, min: 0, placeholder: 'quantity', class: 'form-control' %>
+		</div>
     <%= f.fields_for :food, @inventory.foods.build do |food_fields| %>
-      <%= food_fields.text_field :name, placeholder: 'name', class: 'form-control mb-2' %>
-      <%= food_fields.number_field :price, placeholder: 'price', class: 'form-control mb-2' %>
-      <%= food_fields.select :measurement_unit, ["mg", "g", "kg"], class: 'form-control mb-2' %>
+			<div class="mb-2">
+				 <%= food_fields.text_field :name, placeholder: 'name', class: 'form-control' %>
+			</div>
+			<div class="mb-2">
+				<%= food_fields.number_field :price, min: 0, placeholder: 'price', class: 'form-control' %>
+			</div>
+			<div class="mb-2">
+				 <%= f.label :measurement_unit, class: "text-light"%>
+				<%= food_fields.select :measurement_unit, ["mg", "g", "kg"], class: 'form-control' %>
+			</div>
     <% end %>
     <%= f.submit "add", class: "btn btn-primary" %>
   <% end %>
 </section>
+
+<script>
+  let form = document.querySelector('#food-form')
+	let formBtn = document.querySelector('#food-btn')
+	formBtn.addEventListener('click', ()=> {
+		form.classList.toggle('d-none')
+	})
+</script>
