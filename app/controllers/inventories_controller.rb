@@ -24,7 +24,7 @@ class InventoriesController < ApplicationController
   end
 
   def destroy
-    @inventory = Inventory.find(params[:id])
+    @inventory = Inventory.find_by_id(params[:id])
     @inventory.destroy
 
     if @inventory.destroyed?
