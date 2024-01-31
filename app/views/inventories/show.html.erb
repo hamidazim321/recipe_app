@@ -1,0 +1,24 @@
+<section>
+  <div class="d-flex flex-column mb-3 pb-2 border-2 border-dark border-bottom">
+    <h1 class="text-center"><%= @inventory.name%></h1>
+    <button class="ms-auto">add food button</button>
+  </div>
+  <table class="table border-top-2">
+    <thead>
+      <tr class="table-secondary">
+        <th class="border-top-0 border border-2">Food</th>
+        <th class="border-top-0 border border-2">Quantity</th>
+        <th class="border-top-0 border border-2">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @inventory.inventory_foods.each do |i| %>
+        <tr>
+          <td class="border-top-0 border border-2"><%= i.food.name%></td>
+          <td class="border-top-0 border border-2"><%= i.quantity%></td>
+          <td class="border-top-0 border border-2">Remove link</td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+</section>
