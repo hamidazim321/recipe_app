@@ -22,7 +22,7 @@
   <div class="d-flex justify-content-between border-bottom border-2 pb-2">
     <button>Generate shopping list</button>
     <%if can? :update, @recipe%>
-      <button data-controller="modal" data-action="click->modal#inventoryModal" >Add ingredients</button>
+      <button data-controller="modal" data-action="click->modal#foodModal" >Add ingredients</button>
     <%end%>
   </div>
   <table class="table border-top-2">
