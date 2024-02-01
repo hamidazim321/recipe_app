@@ -6,5 +6,6 @@ class Ability
     return unless user.present?
 
     can :manage, Recipe, user_id: user.id
+    can :manage, Inventory, user_id: user.id
   end
 end

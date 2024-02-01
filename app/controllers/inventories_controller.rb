@@ -5,7 +5,9 @@ class InventoriesController < ApplicationController
     @inventories = Inventory.where(user_id: current_user.id)
   end
 
-  def show; end
+  def show
+    @inventory = Inventory.includes(inventory_foods: :food).find_by_id(params[:id])
+  end
 
   def new
     @inventory = Inventory.new
@@ -22,7 +24,7 @@ class InventoriesController < ApplicationController
   end
 
   def destroy
-    @inventory = Inventory.find(params[:id])
+    @inventory = Inventory.find_by_id(params[:id])
     @inventory.destroy
 
     if @inventory.destroyed?

@@ -8,7 +8,7 @@
       <% @inventories.each do |inventory| %>
         <div class="inventory-card">
           <div class="inventory-card-header">
-              <a href="inventory_path(id: inventory.id)" class="inventory-card-name"><%= inventory.name %></a>
+              <%= link_to inventory.name, inventory_path(inventory.id), class: "inventory-card-name" %>
               <p class="inventory-card-description"><%= inventory.description %></p> 
           </div>
           <%= link_to "Remove", inventory_path(inventory.id), method: :delete, data: { confirm: "Are you sure?" }, class: "inventory-card-link inventory-card-link-remove" %>
