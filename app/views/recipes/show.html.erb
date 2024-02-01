@@ -42,7 +42,7 @@
           <td class="border-top-0 border border-2">$<%= rf.food.price%></td>
           <td class="border-top-0 border border-2">
             <div class="d-flex gap-3">
-              <button class="btn btn-success" data-controller="modal" data-action="click->modal#foodModal">Modify</button>
+              <button class="btn btn-success" data-controller="modal" data-modal-id="edit_recipe_food_<%= rf.id %>"data-action="click->modal#controlModal">Modify</button>
               <%= button_to "Remove", food_path(rf.food.id), method: :delete, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, class: 'btn btn-danger'%>
             </div>
           </td>
