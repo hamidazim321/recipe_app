@@ -20,6 +20,7 @@ class RecipeFoodsController < ApplicationController
   end
 
   private
+
   def recipe_food_params
     params.require(:recipe_food).permit(:recipe_id, :quantity, food_attributes: %i[name measurement_unit price])
   end

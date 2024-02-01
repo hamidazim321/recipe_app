@@ -16,7 +16,7 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     if @recipe.save
-      flash[:notice] = "Recipe Created"
+      flash[:notice] = 'Recipe Created'
       redirect_to recipes_path
     else
       flash[:error] = @recipe.errors.full_messages.to_sentence
@@ -49,7 +49,9 @@ class RecipesController < ApplicationController
   end
 
   private
+
   def recipe_params
-    params.require(:recipe).permit(:name, :description, :preparation_time, :cooking_time, :public).merge(user_id: current_user.id)
+    params.require(:recipe).permit(:name, :description, :preparation_time, :cooking_time,
+                                   :public).merge(user_id: current_user.id)
   end
 end

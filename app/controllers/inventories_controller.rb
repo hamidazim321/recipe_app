@@ -45,15 +45,13 @@ class InventoriesController < ApplicationController
     @recipe.recipe_foods.each do |recipe_food|
       inventory_food = @inventory.inventory_foods.find { |f| f.food_id == recipe_food.food_id }
 
-      if inventory_food.nil? || inventory_food.quantity < recipe_food.quantity
-        missing_quantity = inventory_food.nil? ? recipe_food.quantity : recipe_food.quantity - inventory_food.quantity
-        cost = (missing_quantity/recipe_food.quantity) * recipe_food.food.price
-        @missing_foods << { name: recipe_food.food.name, missing_quantity: missing_quantity, cost: cost }
-      end
+      next unless inventory_food.nil? || inventory_food.quantity < recipe_food.quantity
+
+      missing_quantity = inventory_food.nil? ? recipe_food.quantity : recipe_food.quantity - inventory_food.quantity
+      cost = (missing_quantity / recipe_food.quantity) * recipe_food.food.price
+      @missing_foods << { name: recipe_food.food.name, missing_quantity:, cost: }
     end
   end
-
-
 
   private
 
