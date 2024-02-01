@@ -16,7 +16,7 @@
         <tr>
           <td class="border-top-0 border border-2"><%= i.food.name%></td>
           <td class="border-top-0 border border-2"><%= i.quantity%></td>
-          <td class="border-top-0 border border-2"><%= button_to "Remove", food_path(i.food.id), method: :delete, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }%></td>
+          <td class="border-top-0 border border-2"><%= button_to "Remove", food_path(i.food.id), method: :delete, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, class: "btn fw-bold text-primary"%></td>
         </tr>
       <%end%>
     </tbody>
@@ -43,9 +43,9 @@
 </section>
 
 <script>
-  let form = document.querySelector('#food-form')
-	let formBtn = document.querySelector('#food-btn')
+	var formBtn = document.querySelector('#food-btn')
 	formBtn.addEventListener('click', ()=> {
+    let form = document.querySelector('#food-form')
 		form.classList.toggle('d-none')
 	})
 </script>
