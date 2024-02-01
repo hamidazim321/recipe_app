@@ -1,7 +1,7 @@
 <section>
   <div class="d-flex flex-column mb-3 pb-2 border-2 border-dark border-bottom">
     <h1 class="text-center"><%= @inventory.name%></h1>
-    <button class="ms-auto", id="food-btn">add food</button>
+    <button class="ms-auto", id="food-btn" data-controller="modal" data-action="click->modal#inventoryModal">add food</button>
   </div>
   <table class="table border-top-2">
     <thead>
@@ -41,11 +41,3 @@
     <%= f.submit "add", class: "btn btn-primary" %>
   <% end %>
 </section>
-
-<script>
-	var formBtn = document.querySelector('#food-btn')
-	formBtn.addEventListener('click', ()=> {
-    let form = document.querySelector('#food-form')
-		form.classList.toggle('d-none')
-	})
-</script>
