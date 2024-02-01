@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     end
   end
   resources :inventories
-  resources :foods, only: [:create, :destroy]
+  resources :foods, only: [:create, :destroy, :update]
   resources :inventory_foods, only: [:create, :destroy]
   resources :recipe_foods, only: [:create, :destroy]
   

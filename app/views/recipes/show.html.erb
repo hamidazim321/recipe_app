@@ -40,7 +40,12 @@
           <td class="border-top-0 border border-2"><%= rf.food.name%></td>
           <td class="border-top-0 border border-2"><%= rf.quantity%></td>
           <td class="border-top-0 border border-2">$<%= rf.food.price%></td>
-          <td class="border-top-0 border border-2">Modify Remove</td>
+          <td class="border-top-0 border border-2">
+            <div class="d-flex gap-3">
+              <button class="btn btn-success">Modify</button>
+              <%= button_to "Remove", food_path(rf.food.id), method: :delete, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, class: 'btn btn-danger'%>
+            </div>
+          </td>
         </tr>
       <%end%>
     </tbody>
