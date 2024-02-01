@@ -38,7 +38,7 @@
       <% @recipe.recipe_foods.each do |rf|%>
         <tr>
           <td class="border-top-0 border border-2"><%= rf.food.name%></td>
-          <td class="border-top-0 border border-2"><%= rf.quantity%></td>
+          <td class="border-top-0 border border-2"><%= rf.quantity%><%= rf.food.measurement_unit%></td>
           <td class="border-top-0 border border-2">$<%= rf.food.price%></td>
           <td class="border-top-0 border border-2">
             <div class="d-flex gap-3">

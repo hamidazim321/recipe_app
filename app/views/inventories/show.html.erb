@@ -15,7 +15,7 @@
       <% @inventory.inventory_foods.each do |i| %>
         <tr>
           <td class="border-top-0 border border-2"><%= i.food.name%></td>
-          <td class="border-top-0 border border-2"><%= i.quantity%></td>
+          <td class="border-top-0 border border-2"><%= i.quantity%><%= i.food.measurement_unit%></td>
           <td class="border-top-0 border border-2"><%= button_to "Remove", food_path(i.food.id), method: :delete, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, class: "btn fw-bold text-primary"%></td>
         </tr>
       <%end%>
