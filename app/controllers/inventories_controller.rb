@@ -36,6 +36,9 @@ class InventoriesController < ApplicationController
     end
   end
 
+  def shopping_list
+  end
+
   private
 
   def inventory_params

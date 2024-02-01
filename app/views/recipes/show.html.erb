@@ -92,4 +92,17 @@
     <% end %>
   <% end %>
 
+  <div id="shopping-list-generator" class="p-4 border border-2 w-50">
+    <h1>Generating Shopping List</h1>
+    <p>Choose an inventory</p>
+    <div class="d-flex align-items-center justify-content-between">
+      <select id="inventory-select" data-controller="link-update" data-action="change->link-update#updateLink">
+				<% @inventories.each do |i|%>
+					<option value="<%= i.id %>"><%= i.name %></option>
+				<%end%>
+			</select>
+			<%= link_to "Generate", inventory_shopping_list_path(recipe_id: @recipe.id, inventory_id: @inventories.first.id), id: "generate-link", data: { "link-update-target": "link" } %>
+    </div>
+  </div>
+
 </section>
