@@ -20,7 +20,7 @@ RSpec.describe Food, type: :model do
     expect(food2).to be_valid
   end
   it 'should check that name length is below 120 chars' do
-    invalid_name = "a"*121
+    invalid_name = 'a' * 121
     food1 = Food.new(name: 'food1', measurement_unit: 'mg', price: 23)
     food2 = Food.new(name: invalid_name, measurement_unit: 'mg', price: 23)
     expect(food1).to be_valid
