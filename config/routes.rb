@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :inventories
   resources :foods, only: [:create, :destroy]
   resources :inventory_foods, only: [:create, :destroy]
+  resources :recipe_foods, only: [:create, :destroy]
   
   get 'public_recipes', to: 'recipes#public_recipes'
   devise_scope :user do
