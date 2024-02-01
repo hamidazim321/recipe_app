@@ -9,9 +9,9 @@ Rails.application.routes.draw do
     end
   end
   resources :inventories
-  resources :foods, only: [:create, :destroy, :update]
+  resources :foods, only: [:create, :destroy]
   resources :inventory_foods, only: [:create, :destroy]
-  resources :recipe_foods, only: [:create, :destroy]
+  resources :recipe_foods, only: [:create, :destroy, :update]
   
   get 'public_recipes', to: 'recipes#public_recipes'
   devise_scope :user do

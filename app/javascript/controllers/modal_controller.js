@@ -1,8 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  foodModal(){
-    let form = document.querySelector('#food-form')
-    form.classList.toggle('d-none')
+  controlModal(){
+    let modalId = this.data.get('id')
+    let modal = document.getElementById(modalId)
+    modal.classList.toggle('d-none')
   }
 }

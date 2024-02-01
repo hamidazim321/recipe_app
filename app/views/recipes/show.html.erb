@@ -22,7 +22,7 @@
   <div class="d-flex justify-content-between border-bottom border-2 pb-2">
     <button>Generate shopping list</button>
     <%if can? :update, @recipe%>
-      <button data-controller="modal" data-action="click->modal#foodModal" >Add ingredients</button>
+      <button class="ms-auto" id="food-btn" data-controller="modal" data-modal-id="food-form" data-action="click->modal#controlModal">add food</button>
     <%end%>
   </div>
   <table class="table border-top-2">
@@ -42,7 +42,7 @@
           <td class="border-top-0 border border-2">$<%= rf.food.price%></td>
           <td class="border-top-0 border border-2">
             <div class="d-flex gap-3">
-              <button class="btn btn-success">Modify</button>
+              <button class="btn btn-success" data-controller="modal" data-action="click->modal#foodModal">Modify</button>
               <%= button_to "Remove", food_path(rf.food.id), method: :delete, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, class: 'btn btn-danger'%>
             </div>
           </td>
@@ -69,4 +69,27 @@
     <% end %>
     <%= f.submit "add", class: "btn btn-primary" %>
   <% end %>
+  
+  <% @recipe.recipe_foods.each do |rf| %>
+    <%= form_with(model: rf, local: true, class: "d-none position-absolute top-50 start-50 translate-middle bg-secondary w-50 p-4", id: "edit_recipe_food_#{rf.id}") do |f| %>
+      <%= f.hidden_field :recipe_id, value: @recipe.id %>
+      <div class="mb-2">
+        <%= f.number_field :quantity, min: 0, placeholder: 'quantity', class: 'form-control' %>
+      </div>
+      <%= f.fields_for :food do |food_fields| %>
+        <div class="mb-2">
+          <%= food_fields.text_field :name, placeholder: 'food name', class: 'form-control' %>
+        </div>
+        <div class="mb-2">
+          <%= food_fields.number_field :price, min: 0, placeholder: 'price', class: 'form-control' %>
+        </div>
+        <div class="mb-2">
+          <%= f.label :measurement_unit, class: "text-light"%>
+          <%= food_fields.select :measurement_unit, ["mg", "g", "kg"], class: 'form-control' %>
+        </div>
+      <% end %>
+      <%= f.submit "Update", class: "btn btn-primary" %>
+    <% end %>
+  <% end %>
+
 </section>
