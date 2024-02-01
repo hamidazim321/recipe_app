@@ -11,7 +11,7 @@
               <%= link_to inventory.name, inventory_path(inventory.id), class: "inventory-card-name" %>
               <p class="inventory-card-description"><%= inventory.description %></p> 
           </div>
-          <%= link_to "Remove", inventory_path(inventory.id), method: :delete, data: { confirm: "Are you sure?" }, class: "inventory-card-link inventory-card-link-remove" %>
+          <%= button_to "Remove inventory", inventory_path(inventory.id), method: :delete, data: { confirm: "Are you sure?" }, class: "inventory-card-link inventory-card-link-remove" %>
         </div>
       <% end %>
     <% end %>
