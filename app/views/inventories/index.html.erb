@@ -2,6 +2,9 @@
 <div id="inventory-list">
   <% if current_user %>
     <h1>Your Inventories</h1>
+    <div class="d-flex justify-content-end">
+      <%= link_to "add inventory", new_inventory_path, class: "btn btn-primary"%>
+    </div>
     <% if @inventories.empty? %>
       <p>No inventories yet.</p>
     <% else %>
@@ -11,7 +14,7 @@
               <%= link_to inventory.name, inventory_path(inventory.id), class: "inventory-card-name" %>
               <p class="inventory-card-description text-start"><%= inventory.description %></p> 
           </div>
-          <%= button_to "Remove", inventory_path(inventory.id), method: :delete, data: { confirm: "Are you sure?" }, class: "inventory-card-link inventory-card-link-remove" %>
+          <%= button_to "Remove", inventory_path(inventory.id), method: :delete, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, class: "inventory-card-link inventory-card-link-remove text-danger" %>
         </div>
       <% end %>
     <% end %>

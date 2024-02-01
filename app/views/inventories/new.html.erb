@@ -1,0 +1,5 @@
+<%= form_with(model: @inventory, local: true) do |f|%>
+  <%= f.text_field :name, placeholder: "inventory name", class: "form-control mb-2" %>
+  <%= f.text_area :description, placeholder: "inventory description", class: "form-control mb-2" %>
+  <%= f.submit "create", class: "btn btn-primary" %>
+<%end%>
