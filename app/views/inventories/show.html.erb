@@ -1,7 +1,7 @@
 <section>
   <div class="d-flex flex-column mb-3 pb-2 border-2 border-dark border-bottom">
     <h1 class="text-center"><%= @inventory.name%></h1>
-    <button class="ms-auto", id="food-btn">add food</button>
+    <button class="ms-auto" id="food-btn" data-controller="modal" data-modal-id="food-form" data-action="click->modal#controlModal">add food</button>
   </div>
   <table class="table border-top-2">
     <thead>
@@ -15,8 +15,8 @@
       <% @inventory.inventory_foods.each do |i| %>
         <tr>
           <td class="border-top-0 border border-2"><%= i.food.name%></td>
-          <td class="border-top-0 border border-2"><%= i.quantity%></td>
-          <td class="border-top-0 border border-2"><%= button_to "Remove", food_path(i.food.id), method: :delete, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }%></td>
+          <td class="border-top-0 border border-2"><%= i.quantity%><%= i.food.measurement_unit%></td>
+          <td class="border-top-0 border border-2"><%= button_to "Remove", food_path(i.food.id), method: :delete, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, class: "btn fw-bold text-primary"%></td>
         </tr>
       <%end%>
     </tbody>
@@ -41,11 +41,3 @@
     <%= f.submit "add", class: "btn btn-primary" %>
   <% end %>
 </section>
-
-<script>
-  let form = document.querySelector('#food-form')
-	let formBtn = document.querySelector('#food-btn')
-	formBtn.addEventListener('click', ()=> {
-		form.classList.toggle('d-none')
-	})
-</script>

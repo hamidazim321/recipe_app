@@ -5,11 +5,24 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipe = Recipe.find_by_id(params[:id])
+    @recipe = Recipe.includes(recipe_foods: :food).find_by_id(params[:id])
+    @inventories = Inventory.where(user_id: current_user.id)
   end
 
-  # def create
-  # end
+  def new
+    @recipe = Recipe.new
+  end
+
+  def create
+    @recipe = Recipe.new(recipe_params)
+    if @recipe.save
+      flash[:notice] = 'Recipe Created'
+      redirect_to recipes_path
+    else
+      flash[:error] = @recipe.errors.full_messages.to_sentence
+      render :new
+    end
+  end
 
   def destroy
     @recipe = Recipe.find_by_id(params[:id])
@@ -33,5 +46,12 @@ class RecipesController < ApplicationController
       flash[:error] = @recipe.errors.full_messages.to_sentence
     end
     redirect_to request.referrer
+  end
+
+  private
+
+  def recipe_params
+    params.require(:recipe).permit(:name, :description, :preparation_time, :cooking_time,
+                                   :public).merge(user_id: current_user.id)
   end
 end

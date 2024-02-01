@@ -8,9 +8,12 @@ Rails.application.routes.draw do
       patch :update_public
     end
   end
-  resources :inventories
+  resources :inventories do 
+    get 'shopping_list/:recipe_id', to: 'inventories#shopping_list', as: 'shopping_list'
+  end
   resources :foods, only: [:create, :destroy]
   resources :inventory_foods, only: [:create, :destroy]
+  resources :recipe_foods, only: [:create, :destroy, :update]
   
   get 'public_recipes', to: 'recipes#public_recipes'
   devise_scope :user do

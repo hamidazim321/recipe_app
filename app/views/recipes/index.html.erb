@@ -1,4 +1,5 @@
 <section>
+  <%= link_to "add new recipe", new_recipe_path, class: 'btn btn-success mb-3'%>
   <ul class="list-unstyled d-flex flex-column gap-3"> 
     <%@recipes.each do |recipe|%>
       <li class="d-flex gap-5 border border-2 p-2">

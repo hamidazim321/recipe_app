@@ -36,6 +36,23 @@ class InventoriesController < ApplicationController
     end
   end
 
+  def shopping_list
+    @inventory = Inventory.includes(inventory_foods: :food).find_by_id(params[:inventory_id])
+    @recipe = Recipe.includes(recipe_foods: :food).find_by_id(params[:recipe_id])
+
+    @missing_foods = []
+
+    @recipe.recipe_foods.each do |recipe_food|
+      inventory_food = @inventory.inventory_foods.find { |f| f.food_id == recipe_food.food_id }
+
+      next unless inventory_food.nil? || inventory_food.quantity < recipe_food.quantity
+
+      missing_quantity = inventory_food.nil? ? recipe_food.quantity : recipe_food.quantity - inventory_food.quantity
+      cost = (missing_quantity / recipe_food.quantity) * recipe_food.food.price
+      @missing_foods << { name: recipe_food.food.name, missing_quantity:, cost: }
+    end
+  end
+
   private
 
   def inventory_params

@@ -20,9 +20,9 @@
     <p><%= @recipe.description%></p>
   </div>
   <div class="d-flex justify-content-between border-bottom border-2 pb-2">
-    <button>Generate shopping list</button>
+    <button data-controller="modal" data-modal-id="shopping-list-generator" data-action="click->modal#controlModal">Generate shopping list</button>
     <%if can? :update, @recipe%>
-      <button>Add ingredients</button>
+      <button class="ms-auto" id="food-btn" data-controller="modal" data-modal-id="food-form" data-action="click->modal#controlModal">add food</button>
     <%end%>
   </div>
   <table class="table border-top-2">
@@ -35,12 +35,74 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td class="border-top-0 border border-2">Data later</td>
-        <td class="border-top-0 border border-2">Data later</td>
-        <td class="border-top-0 border border-2">Data later</td>
-        <td class="border-top-0 border border-2">Data later</td>
-      </tr>
+      <% @recipe.recipe_foods.each do |rf|%>
+        <tr>
+          <td class="border-top-0 border border-2"><%= rf.food.name%></td>
+          <td class="border-top-0 border border-2"><%= rf.quantity%><%= rf.food.measurement_unit%></td>
+          <td class="border-top-0 border border-2">$<%= rf.food.price%></td>
+          <td class="border-top-0 border border-2">
+            <div class="d-flex gap-3">
+              <button class="btn btn-success" data-controller="modal" data-modal-id="edit_recipe_food_<%= rf.id %>"data-action="click->modal#controlModal">Modify</button>
+              <%= button_to "Remove", food_path(rf.food.id), method: :delete, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, class: 'btn btn-danger'%>
+            </div>
+          </td>
+        </tr>
+      <%end%>
     </tbody>
   </table>
+  <%= form_with(model: [ @recipe.recipe_foods.build ], local: true, class: "d-none position-absolute top-50 start-50 translate-middle bg-secondary w-50 p-4", id: "food-form") do |f| %>
+    <%= f.hidden_field :recipe_id, value: @recipe.id %>
+		<div class="mb-2">
+			<%= f.number_field :quantity, min: 0, placeholder: 'quantity', class: 'form-control' %>
+		</div>
+    <%= f.fields_for :food, @recipe.foods.build do |food_fields| %>
+			<div class="mb-2">
+				 <%= food_fields.text_field :name, placeholder: 'food name', class: 'form-control' %>
+			</div>
+			<div class="mb-2">
+				<%= food_fields.number_field :price, min: 0, placeholder: 'price', class: 'form-control' %>
+			</div>
+			<div class="mb-2">
+				 <%= f.label :measurement_unit, class: "text-light"%>
+				<%= food_fields.select :measurement_unit, ["mg", "g", "kg"], class: 'form-control' %>
+			</div>
+    <% end %>
+    <%= f.submit "add", class: "btn btn-primary" %>
+  <% end %>
+  
+  <% @recipe.recipe_foods.each do |rf| %>
+    <%= form_with(model: rf, local: true, class: "d-none position-absolute top-50 start-50 translate-middle bg-secondary w-50 p-4", id: "edit_recipe_food_#{rf.id}") do |f| %>
+      <%= f.hidden_field :recipe_id, value: @recipe.id %>
+      <div class="mb-2">
+        <%= f.number_field :quantity, min: 0, placeholder: 'quantity', class: 'form-control' %>
+      </div>
+      <%= f.fields_for :food do |food_fields| %>
+        <div class="mb-2">
+          <%= food_fields.text_field :name, placeholder: 'food name', class: 'form-control' %>
+        </div>
+        <div class="mb-2">
+          <%= food_fields.number_field :price, min: 0, placeholder: 'price', class: 'form-control' %>
+        </div>
+        <div class="mb-2">
+          <%= f.label :measurement_unit, class: "text-light"%>
+          <%= food_fields.select :measurement_unit, ["mg", "g", "kg"], class: 'form-control' %>
+        </div>
+      <% end %>
+      <%= f.submit "Update", class: "btn btn-primary" %>
+    <% end %>
+  <% end %>
+
+  <div id="shopping-list-generator" class="d-none position-absolute top-50 start-50 translate-middle bg-light border-dark w-50 p-4">
+    <h1>Generating Shopping List</h1>
+    <p>Choose an inventory</p>
+    <div class="d-flex align-items-center justify-content-between">
+      <select id="inventory-select" data-controller="link-update" data-action="change->link-update#updateLink">
+				<% @inventories.each do |i|%>
+					<option value="<%= i.id %>"><%= i.name %></option>
+				<%end%>
+			</select>
+			<%= link_to "Generate", inventory_shopping_list_path(recipe_id: @recipe.id, inventory_id: @inventories.first.id), id: "generate-link", class: "btn btn-success" %>
+    </div>
+  </div>
+
 </section>
