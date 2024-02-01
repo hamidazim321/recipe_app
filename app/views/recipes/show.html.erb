@@ -35,12 +35,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td class="border-top-0 border border-2">Data later</td>
-        <td class="border-top-0 border border-2">Data later</td>
-        <td class="border-top-0 border border-2">Data later</td>
-        <td class="border-top-0 border border-2">Data later</td>
-      </tr>
+      <% @recipe.recipe_foods.each do |rf|%>
+        <tr>
+          <td class="border-top-0 border border-2"><%= rf.food.name%></td>
+          <td class="border-top-0 border border-2"><%= rf.quantity%></td>
+          <td class="border-top-0 border border-2">$<%= rf.food.price%></td>
+          <td class="border-top-0 border border-2">Modify Remove</td>
+        </tr>
+      <%end%>
     </tbody>
   </table>
 </section>
