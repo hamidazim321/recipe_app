@@ -35,7 +35,11 @@ class RecipesController < ApplicationController
   end
 
   def public_recipes
-    @recipes = Recipe.includes(:user).where(public: true).order(created_at: :desc)
+    @recipes = Recipe.select('recipes.*, COUNT(recipe_foods.id) AS food_count, SUM(foods.price) AS total_price')
+      .left_outer_joins(:user, recipe_foods: :food)
+      .where(public: true)
+      .group('recipes.id, users.id')
+      .order(created_at: :desc)
   end
 
   def update_public
