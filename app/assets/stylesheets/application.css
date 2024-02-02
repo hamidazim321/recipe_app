@@ -32,7 +32,7 @@ body {
 
 .inventory-card-header {
   display: flex;
-  justify-content: space-between;
+  gap: 5%;
   align-items: center;
 }
 
