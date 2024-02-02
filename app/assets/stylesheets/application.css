@@ -1,0 +1,66 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+body {
+  background: #86b6e9;
+}
+
+#inventory-list {
+  margin: 0 auto;
+  width: 80%;
+  text-align: center;
+}
+
+.inventory-card {
+  margin: 20px 0;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.inventory-card-header {
+  display: flex;
+  gap: 5%;
+  align-items: center;
+}
+
+.inventory-card-name {
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.inventory-card-description {
+  margin: 10px 0;
+}
+
+.inventory-card-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inventory-card-link {
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.inventory-card-link-remove {
+  width: 10%;
+  display: flex;
+  align-self: flex-start;
+  text-align: center;
+  color: #007bff;
+}

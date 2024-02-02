@@ -1,0 +1,11 @@
+<%= form_with(model: @recipe, local:true) do |f|%>
+  <%= f.text_field :name, placeholder: "recipe name", class: "form-control mb-2"%>
+  <%= f.text_area :description, placeholder: "recipe description", class: "form-control mb-2"%>
+  <%= f.number_field :cooking_time, placeholder: "cooking time: hours", class: "form-control mb-2"%>
+  <%= f.number_field :preparation_time, placeholder: "preparation time: hours", class: "form-control mb-2"%>
+  <div class="mb-2">
+    <%= f.label :public%>
+    <%= f.check_box :public%>
+  <div>
+  <%= f.submit "Create", class:"btn btn-primary mt-2"%>
+<%end%>

@@ -1,0 +1,18 @@
+<header class="border-2 border-bottom mb-3">
+  <nav class="d-flex align-items-center w-100">
+    <div class="w-25">
+      <p class="fs-4 fw-bold text-success">Recipe App</p>
+    </div>
+    <ul class="d-flex list-unstyled justify-content-start gap-5 ">
+      <% if user_signed_in? %>
+        <li><%= link_to 'My Recipes', recipes_path, class: "text-decoration-none text-primary fw-bold"%></li>
+        <li><%= link_to 'My Inventories', inventories_path, class: "text-decoration-none text-primary fw-bold"%></li>
+        <li><%= link_to 'Public Recipes', public_recipes_path, class: "text-decoration-none text-primary fw-bold"%></li>
+        <li><%= link_to 'Logout', destroy_user_session_path, class: "text-decoration-none text-primary fw-bold"%></li>
+        <%else%>
+          <li><%= link_to 'Login', new_user_session_path, class: "text-decoration-none text-primary fw-bold"%></li>
+          <li><%= link_to 'Sign up', new_user_registration_path, class: "text-decoration-none text-primary fw-bold"%></li>
+      <%end%>
+    </ul>
+  </nav>
+</header>
